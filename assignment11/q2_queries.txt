@@ -3,7 +3,7 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
+%%%%% NAME: Sami Peng
 %%%%% NAME:
 %%%%% NAME:
 %
@@ -18,52 +18,52 @@
 % Don't forget to end queries with a period.
 
 %%%%%% QUERY 1
-% EXPLANATION: 
-
+% EXPLANATION: Total Deposits koleda has made at the bank cibc
+totalDeposits(koleda,cibc,B).
 
 
 %%%%%% QUERY 2
-% EXPLANATION: 
-
+% EXPLANATION: What are the total withdraws that ben has made?
+totalWithdrawals(ben,bmo,B).
 
 
 %%%%%% QUERY 3
-% EXPLANATION: 
-
+% EXPLANATION: What is the subtotal of koleda's cibc account?
+subtotal(koleda,cibc,Subtotal).
 
 
 %%%%%% QUERY 4
-% EXPLANATION: 
-
+% EXPLANATION: is there anyone who did not get any interest?
+accruedInterest(P,B,I), I =:= 0.
 
 
 %%%%%% QUERY 5
-% EXPLANATION: 
-
+% EXPLANATION: Who has the greatest interest?
+accruedInterest(P,B,I), not (accruedInterest(P2,B2, I2), I2 > I).
 
 
 %%%%%% QUERY 6
-% EXPLANATION: 
-
+% EXPLANATION: is there anyone who has been penalized? 
+accruedPenalty(P,B,Penalty), Penalty > 0.
 
 
 %%%%%% QUERY 7
-% EXPLANATION: 
-
+% EXPLANATION: For people who has a penalty, what are their total withdrawls?
+accruedPenalty(P,B,Penalty), Penalty > 0, totalWithdrawals(P,B,WithDraws).
 
 
 %%%%%% QUERY 8
-% EXPLANATION: 
-
+% EXPLANATION: Is there anyone with a negative subtotal?
+subtotal(P,B,S), S < 0.
 
 
 %%%%%% QUERY 9
-% EXPLANATION: 
-
+% EXPLANATION: Who has the most end of month balance?
+endOfMonthBalance(P,B), not (endOfMonthBalance(P2,B2), B2 > B).
 
 %%%%%% QUERY 10
-% EXPLANATION: 
-
+% EXPLANATION: Who has the least end of month balance?
+endOfMonthBalance(P,B), not (endOfMonthBalance(P2,B2), B2 < B). 
 
 
 %%%%%% YOU MAY CHOOSE TO ADD MORE THAN 10 QUERIES HERE
@@ -73,4 +73,81 @@
 %%%%% INTERACTION
 %
 % Add your interaction below.
-% 
+% [eclipse 31]: totalDeposits(koleda,cibc,B).
+%
+%B = 25000
+%Yes (0.00s cpu, solution 1, maybe more) ? ;
+%
+%No (0.00s cpu)
+%[eclipse 32]: totalWithdrawals(ben,bmo,B).
+%
+%B = 5000
+%Yes (0.00s cpu)
+%
+%[eclipse 33]: subtotal(koleda,cibc,Subtotal).
+%
+%Subtotal = 15000
+%Yes (0.00s cpu, solution 1, maybe more) ? ;
+%
+%No (0.00s cpu)
+%
+%[eclipse 34]: accruedInterest(P,B,I), I =:= 0.
+%
+%P = nicole
+%B = cibc
+%I = -0.0
+%Yes (0.00s cpu)
+%
+%[eclipse 35]: accruedInterest(P,B,I), not (accruedInterest(P2,B2, I2), I2 > I).
+%
+%P = koleda
+%B = bmo
+%I = 210.0
+%P2 = P2
+%B2 = B2
+%I2 = I2
+%Yes (0.00s cpu, solution 1, maybe more) ? ;
+%
+%No (0.00s cpu)
+%
+%[eclipse 36]: accruedPenalty(P,B,Penalty), Penalty > 0.
+%
+%P = nicole
+%B = cibc
+%Penalty = 50
+%Yes (0.00s cpu)
+%
+%[eclipse 37]: accruedPenalty(P,B,Penalty), Penalty > 0, totalWithdrawals(P,B,WithDraws).
+%
+%P = nicole
+%B = cibc
+%Penalty = 50
+%WithDraws = 1500
+%Yes (0.00s cpu)
+%
+%[eclipse 41]: subtotal(P,B,S), S < 0.
+%
+%P = nicole
+%B = cibc
+%S = -1000
+%Yes (0.00s cpu)
+%
+%[eclipse 42]: endOfMonthBalance(P,B), not (endOfMonthBalance(P2,B2), B2 > B).
+%
+%P = koleda
+%B = 50285.0
+%P2 = P2
+%B2 = B2
+%Yes (0.00s cpu, solution 1, maybe more) ? ;
+%
+%No (0.00s cpu)
+%
+%[eclipse 43]: endOfMonthBalance(P,B), not (endOfMonthBalance(P2,B2), B2 < B). 
+%
+%P = nicole
+%B = -1050.0
+%P2 = P2
+%B2 = B2
+%Yes (0.00s cpu, solution 1, maybe more) ? ;
+%
+%No (0.00s cpu)
