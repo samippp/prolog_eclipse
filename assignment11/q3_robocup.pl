@@ -30,14 +30,14 @@ pathClear(r4, net).
 pathClear(r1, r5).
 pathClear(r5, r6).
 
-% Symmetrical pathClear definition
-pathClearSym(R1, R2) :- pathClear(R1, R2).
-pathClearSym(R1, R2) :- pathClear(R2, R1).
-
 %%%%% SECTION: q3_rules
 %%%%% Put statements for canPass and canScore below. 
 %%%%% You may also define helper predicates in this section
 %%%%% DO NOT PUT ATOMIC FACTS for robot, hasBall, or pathClear below.
+
+% Symmetrical pathClear definition
+pathClearSym(R1, R2) :- pathClear(R1, R2).
+pathClearSym(R1, R2) :- pathClear(R2, R1).
 
 % Base case: direct pass if path is clear and M >= 1
 canPass(R1, R2, M) :-
@@ -55,7 +55,6 @@ canPass(R1, R2, M) :-
     pathClearSym(R1, R3),
     M1 is M - 1,
     canPass(R3, R2, M1).
-
 pass(R1,R2,M,Leftover) :- 
     M >= 1,
     robot(R1),  % Ensure R1 is a valid robot

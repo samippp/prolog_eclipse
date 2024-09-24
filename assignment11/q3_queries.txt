@@ -18,52 +18,52 @@
 % Don't forget to end queries with a period.
 
 %%%%%% QUERY 1
-% EXPLANATION: 
-
+% EXPLANATION: can r1 pass to net?
+canPass(r1,net,1).
 
 
 %%%%%% QUERY 2
-% EXPLANATION: 
-
+% EXPLANATION: who can pass to r3 within 1 move?
+canPass(R1,r2,1).
 
 
 %%%%%% QUERY 3
-% EXPLANATION: 
-
+% EXPLANATION: who can pass to r6 within 3 moves?
+canPass(R1,r6,3).
 
 
 %%%%%% QUERY 4
-% EXPLANATION: 
-
+% EXPLANATION: to whom can r6 pass to within 2 moves?
+canPass(r6,R1,2).
 
 
 %%%%%% QUERY 5
-% EXPLANATION: 
-
+% EXPLANATION: can r3 pass to r6 within 3 moves?
+canPass(r3,r6,3). 
 
 
 %%%%%% QUERY 6
-% EXPLANATION: 
-
+% EXPLANATION: can r6 score within 5 moves?
+canScore(r6,5). 
 
 
 %%%%%% QUERY 7
-% EXPLANATION: 
-
+% EXPLANATION: can r3 score within 1 move?
+canScore(r3,1).
 
 
 %%%%%% QUERY 8
-% EXPLANATION: 
-
+% EXPLANATION: can r6 score within 6 moves?
+canScore(r6,6).
 
 
 %%%%%% QUERY 9
-% EXPLANATION: 
-
+% EXPLANATION: can r2 score within 3 moves?
+canScore(r2,3).
 
 %%%%%% QUERY 10
-% EXPLANATION: 
-
+% EXPLANATION: who can score within 1 move?
+canScore(R1,1). 
 
 
 %%%%%% YOU MAY CHOOSE TO ADD MORE THAN 10 QUERIES HERE
