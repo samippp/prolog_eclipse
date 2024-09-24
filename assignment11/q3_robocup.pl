@@ -86,15 +86,15 @@ canScore(R1, M) :-
     hasBallScore(R1,L).
 
 hasBallScore(R1, M) :- 
-    M < 1,
+    M >= 1,
     robot(R1),
     pathClear(R1,net).
 
 hasBallScore(R1, M) :-
-    M < 1,
+    M > 1,
     robot(R1),
+    M1 is M - 1,
     pathClearSym(R1,R2),
-    M1 is M - 1.
     hasBallScore(R2,M1).
 
 %%%%% END
