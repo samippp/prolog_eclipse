@@ -3,9 +3,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: Sami Peng
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng (501163935)
+%%%%% NAME: Feroz Noormohamed (500203723)
+%%%%% NAME: Mohammad Abdul Rahman (500961636)
 %
 % Add the required rules in the corresponding sections. 
 % If you put the rules in the wrong sections, you will lose marks.
@@ -35,7 +35,7 @@ pathClear(r5, r6).
 %%%%% You may also define helper predicates in this section
 %%%%% DO NOT PUT ATOMIC FACTS for robot, hasBall, or pathClear below.
 
-% Symmetrical pathClear definition
+% Symmetrical pathClear
 pathClearSym(R1, R2) :- pathClear(R1, R2).
 pathClearSym(R1, R2) :- pathClear(R2, R1).
 
@@ -46,36 +46,40 @@ canPass(R1, R2, M) :-
     robot(R2),  % Ensure R2 is a valid robot
     pathClearSym(R1, R2).
 
-% Recursive case: indirect pass if R1 can pass the ball to R3,
-% and R3 can pass the ball to R2 in at most M-1 passes.
+% Recursive case: indirect pass
 canPass(R1, R2, M) :-
     M > 1,
-    robot(R1),  % Ensure R1 is a valid robot
-    robot(R2),  % Ensure R2 is a valid robot
+    robot(R1),  
+    robot(R2),  
     pathClearSym(R1, R3),
     M1 is M - 1,
     canPass(R3, R2, M1).
+
+% Similar to Canpass but can calculate moves left
 pass(R1,R2,M,Leftover) :- 
     M >= 1,
-    robot(R1),  % Ensure R1 is a valid robot
-    robot(R2),  % Ensure R2 is a valid robot
+    robot(R1),  
+    robot(R2),  
     pathClearSym(R1, R2),
     Leftover is M - 1.
 
+% Recursive case: indirect pass with moves left
 pass(R1,R2,M,Leftover) :- 
     M > 1,
-    robot(R1),  % Ensure R1 is a valid robot
-    robot(R2),  % Ensure R2 is a valid robot
+    robot(R1),  
+    robot(R2),  
     pathClearSym(R1, R3),
     M1 is M - 1,
     pass(R3, R2, M1, Leftover).
 
+% Base case: direct shot on goal
 canScore(R1, M) :- 
     M >= 1,
     robot(R1),
     hasBall(R1),
     hasBallScore(R1,M).
 
+% Recurive case: where another robot can pass to a robot with clear shot on goal
 canScore(R1, M) :-
     M >= 1,
     robot(R1),
@@ -84,11 +88,13 @@ canScore(R1, M) :-
     pass(R2,R1,M,L),
     hasBallScore(R1,L).
 
+% Base case: robot hasball and direct shot on goal
 hasBallScore(R1, M) :- 
     M >= 1,
     robot(R1),
     pathClear(R1,net).
 
+% Recursive case: where robot can pass to a robot who can score with remaining moves
 hasBallScore(R1, M) :-
     M > 1,
     robot(R1),
