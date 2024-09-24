@@ -3,7 +3,7 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
+%%%%% NAME: Sami Peng
 %%%%% NAME:
 %%%%% NAME:
 %
@@ -30,11 +30,72 @@ pathClear(r4, net).
 pathClear(r1, r5).
 pathClear(r5, r6).
 
+% Symmetrical pathClear definition
+pathClearSym(R1, R2) :- pathClear(R1, R2).
+pathClearSym(R1, R2) :- pathClear(R2, R1).
+
 %%%%% SECTION: q3_rules
 %%%%% Put statements for canPass and canScore below. 
 %%%%% You may also define helper predicates in this section
 %%%%% DO NOT PUT ATOMIC FACTS for robot, hasBall, or pathClear below.
 
+% Base case: direct pass if path is clear and M >= 1
+canPass(R1, R2, M) :-
+    M >= 1,
+    robot(R1),  % Ensure R1 is a valid robot
+    robot(R2),  % Ensure R2 is a valid robot
+    pathClearSym(R1, R2).
+
+% Recursive case: indirect pass if R1 can pass the ball to R3,
+% and R3 can pass the ball to R2 in at most M-1 passes.
+canPass(R1, R2, M) :-
+    M > 1,
+    robot(R1),  % Ensure R1 is a valid robot
+    robot(R2),  % Ensure R2 is a valid robot
+    pathClearSym(R1, R3),
+    M1 is M - 1,
+    canPass(R3, R2, M1).
+
+pass(R1,R2,M,Leftover) :- 
+    M >= 1,
+    robot(R1),  % Ensure R1 is a valid robot
+    robot(R2),  % Ensure R2 is a valid robot
+    pathClearSym(R1, R2),
+    Leftover is M - 1.
+
+pass(R1,R2,M,Leftover) :- 
+    M > 1,
+    robot(R1),  % Ensure R1 is a valid robot
+    robot(R2),  % Ensure R2 is a valid robot
+    pathClearSym(R1, R3),
+    M1 is M - 1,
+    pass(R3, R2, M1, Leftover).
+
+canScore(R1, M) :- 
+    M >= 1,
+    robot(R1),
+    hasBall(R1),
+    hasBallScore(R1,M).
+
+canScore(R1, M) :-
+    M >= 1,
+    robot(R1),
+    not hasBall(R1),
+    hasBall(R2),
+    pass(R2,R1,M,L),
+    hasBallScore(R1,L).
+
+hasBallScore(R1, M) :- 
+    M < 1,
+    robot(R1),
+    pathClear(R1,net).
+
+hasBallScore(R1, M) :-
+    M < 1,
+    robot(R1),
+    pathClearSym(R1,R2),
+    M1 is M - 1.
+    hasBallScore(R2,M1).
 
 %%%%% END
 % DO NOT PUT ANY ATOMIC PROPOSITIONS OR LINES BELOW
