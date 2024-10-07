@@ -3,9 +3,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: Sami Peng
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng (501163935)
+%%%%% NAME: Feroz Noormohamed (500203723)
+%%%%% NAME: Mohammad Abdul Rahman (500961636)
 %
 % Add your queries below. Please use the following format
 % 
@@ -21,41 +21,33 @@
 % EXPLANATION: can r1 pass to net?
 canPass(r1,net,1).
 
-
 %%%%%% QUERY 2
-% EXPLANATION: who can pass to r3 within 1 move?
+% EXPLANATION: who can pass to r2 within 1 move?
 canPass(R1,r2,1).
-
 
 %%%%%% QUERY 3
 % EXPLANATION: who can pass to r6 within 3 moves?
 canPass(R1,r6,3).
 
-
 %%%%%% QUERY 4
 % EXPLANATION: to whom can r6 pass to within 2 moves?
 canPass(r6,R1,2).
-
 
 %%%%%% QUERY 5
 % EXPLANATION: can r3 pass to r6 within 3 moves?
 canPass(r3,r6,3). 
 
-
 %%%%%% QUERY 6
 % EXPLANATION: can r6 score within 5 moves?
-canScore(r6,5). 
-
+canScore(r6,5).
 
 %%%%%% QUERY 7
 % EXPLANATION: can r3 score within 1 move?
 canScore(r3,1).
 
-
 %%%%%% QUERY 8
 % EXPLANATION: can r6 score within 6 moves?
 canScore(r6,6).
-
 
 %%%%%% QUERY 9
 % EXPLANATION: can r2 score within 3 moves?
@@ -63,8 +55,7 @@ canScore(r2,3).
 
 %%%%%% QUERY 10
 % EXPLANATION: who can score within 1 move?
-canScore(R1,1). 
-
+canScore(R1,1).
 
 %%%%%% YOU MAY CHOOSE TO ADD MORE THAN 10 QUERIES HERE
 %%%%%% HOWEVER, ONLY THE FIRST 10 WILL BE MARKED
@@ -74,3 +65,48 @@ canScore(R1,1).
 %
 % Add your interaction below.
 % 
+
+% 2 ?- canPass(r1,net,1).
+% false.
+
+% 3 ?- canPass(R1,r2,1).
+% R1 = r1 ;
+% R1 = r3 ;
+% false.
+
+% 4 ?- canPass(R1,r6,3).
+% R1 = r5 ;
+% R1 = r1 ;
+% R1 = r2 ;
+% R1 = r3 ;
+% R1 = r5 ;
+% R1 = r5 ;
+% R1 = r6 ;
+% false.
+
+% 5 ?- canPass(r6,R1,2).
+% R1 = r5 ;
+% R1 = r1 ;
+% R1 = r6 ;
+% false.
+
+% 6 ?- canPass(r3,r6,3).
+% true ;
+% false.
+
+% 7 ?- canScore(r6,5).  
+% false.
+
+% 8 ?- canScore(r3,1).
+% true ;
+% false.
+
+% 9 ?- canScore(r6,6).
+% false.
+
+% 10 ?- canScore(r2,3).
+% false.
+
+% 11 ?- canScore(R1,1).
+% R1 = r3 ;
+% false.

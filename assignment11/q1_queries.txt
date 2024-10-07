@@ -3,9 +3,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng (501163935)
+%%%%% NAME: Feroz Noormohamed (500203723)
+%%%%% NAME: Mohammad Abdul Rahman (500961636)
 %
 % Add your answer queries below. Use the following format.
 % 
