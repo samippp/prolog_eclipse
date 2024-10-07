@@ -1,0 +1,50 @@
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME:
+%%%%% NAME:
+
+1.
+    a.  Does not match. 
+        X = a, Y = b, Z = c, [d,e,Y] cannot match to anything
+        
+    b.  Does not Match.
+        [q, [A | [r, s] ], t] and [q, [r, [r, s] ] | B]
+        q = q, [A | [r, s]] = [r,[r,s] ] ? simplify [A | [r,s]] to [A, r, s] != [r,[r,s]] because they are not the same structure
+
+    c.  Does not match.
+        [ [Cow | [cat, dog] ], bird, bug, chicken ] and [ [ant, [cat, dog] ] | Horse]
+        [ Cow | [cat, dog] ] = [ant, [cat, dog] ] ? simplify : [Cow, cat, dog] = [ant, [cat, dog]] ? Does not match because they are not the same structure.
+
+    d.  Match.
+        [1, A, 2 | [A, 3, 4] ] and [B | [2, C | [D | E] ] ]
+        [1, A, 2, A, 3, 4] and [B | [2, C, D| E] ] 
+        [1, A, 2, A, 3, 4] and [B, 2, C, D | E]
+        B = 1, A = 2, C = 2, D = A = 2, E = [3,4]
+
+    e.  Match
+        [A | [ A | [ [ A | [ [A] ] ] ] ] ] and [b | C]
+        lets simplify [A | [A | [ [A | [ [A] ] ] ] ] ] first:
+        [A, A | [ [A | [ [A] ] ] ] ], [A, A, [A | [ [A] ] ] ],
+        [A, A, [A, [A] ] ] and [b | C]
+        A = b, then 
+        [A, [A, [A]]] = C ? Yes, it should match because C can match into anything
+        
+    f.  Does not match
+        [X | [Y | [ Z | [X] ] ] ] and [all, around, the, world, Y]
+        [X, Y | [Z | [ X] ] ], [X, Y, Z | [X] ], [X, Y ,Z, X]
+        [X,Y,Z,X] and [all, around, the ,world, Y]
+         X = all, Y = around, Z = the X = world, Y = ? Does not Match.
+    
+    g.  Match
+        [1, 2 | [ X | [ Y, Z | X] ] ] and [Q | [R, S, [], [ [Y] ] ] ]
+        [1, 2, X | [Y, Z | X] ] and [Q, R, S, [] | [ [Y] ] ]
+        [1, 2, X, Y, Z | X ] and [Q, R, S, [], [Y] ]
+        Q = 1, R = 2, X = S, Y = [], Z = [Y], X = []
+
+    h.  Match
+        [Lions, [[and], tigers], [and], bears, oh | [[my]] ] and [[I, have], [[A], Bad], Feeling | [About | This] ]
+        Lets go through the first one: [Lions, [[and], tigers], [and], bears, oh | [[my]] ]
+        [Lions, [[and], tigers ], [and], bears, oh, [my] ]. Lets go through the second one : [[I, have], [[A], Bad], Feeling | [About | This] ]
+        [ [I, have], [[A], Bad], Feeling, About | This ]. Matching time!
+        [Lions, [[and], tigers ], [and], bears, oh, [my] ] and [ [I, have], [[A], Bad], Feeling, About | This]
+        Lions = [I, have], [[and], tigers] = [[A], Bad] ? A = and, Bad = tigers, Feeling = [and], About = bears, This = [oh, [my] ]
+        
