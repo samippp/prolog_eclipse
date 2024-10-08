@@ -2,9 +2,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME: Feroz Noormohamed 500203723
+%%%%% NAME: Mohammad Abdul Rahman 500961636
 %
 % Add the required rules in the corresponding sections. 
 % If you put the rules in the wrong sections, you will lose marks.
