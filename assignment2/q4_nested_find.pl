@@ -35,14 +35,14 @@ nestedFindDepth([_|Tail], Item, Depth) :-
 % Case 1: Item is found at the top level
 nestedFindIndex([Item|_], Item, 0, 0).
 
-% Case 2: The head is a sublist, search recursively within the sublist, keeping the index fixed
+% Case 2: The head is a sublist, search recursively within the sublist keeping the index fixed
 nestedFindIndex([Head|_], Item, Depth, Index) :-
     is_list(Head),
-    nestedFindIndex(Head, Item, SubDepth, _),  % We discard the internal index of the sublist
-    Depth is SubDepth + 1,  % Increase depth
-    Index = 0.  % Keep top-level index fixed when searching sublist
+    nestedFindIndex(Head, Item, SubDepth, _),  
+    Depth is SubDepth + 1,  
+    Index = 0.  
 
-% Case 3: The head is not a match, search the tail, incrementing the top-level index
+% Case 3: The head is not a match, search the tail incrementing the top-level index
 nestedFindIndex([_|Tail], Item, Depth, Index) :-
     nestedFindIndex(Tail, Item, Depth, TailIndex),
     Index is TailIndex + 1.
