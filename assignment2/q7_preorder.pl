@@ -57,3 +57,15 @@ testTree(2,
 
 %%%%% SECTION: preorder
 %%%%% Put your rules for preorder and any helper predicates below
+preorder(none, nil).
+preorder(tree3(Name, LeftBranch, MiddleBranch, RightBranch), next(Name, FullList)) :-
+    preorder(LeftBranch, LeftList),
+    preorder(MiddleBranch, MiddleList),
+    preorder(RightBranch, RightList),
+    combine(LeftList, MiddleList, TempList),
+    combine(TempList, RightList, FullList).
+
+combine(nil, L, L).
+combine(next(Head, Tail), List, next(Head, NewTail)) :-
+    combine(Tail, List, NewTail).
+
