@@ -10,9 +10,11 @@
         [q, [A | [r, s] ], t] and [q, [r, [r, s] ] | B]
         q = q, [A | [r, s]] = [r,[r,s] ] ? simplify [A | [r,s]] to [A, r, s] != [r,[r,s]] because they are not the same structure
 
-    c.  Does not match.
-        [ [Cow | [cat, dog] ], bird, bug, chicken ] and [ [ant, [cat, dog] ] | Horse]
-        [ Cow | [cat, dog] ] = [ant, [cat, dog] ] ? simplify : [Cow, cat, dog] = [ant, [cat, dog]] ? Does not match because they are not the same structure.
+    c. Does not match.
+    [ [Cow | [cat, dog] ], bird, bug, chicken ] and [ [ant, [cat, dog] ] | Horse]
+    [[Cow, cat, dog], bird, bug, chicken] and [ [ant, [cat, dog] ] | Horse ]
+    Cow = ant, cat \= [cat, dog] wrong structure
+
 
     d.  Match.
         [1, A, 2 | [A, 3, 4] ] and [B | [2, C | [D | E] ] ]
