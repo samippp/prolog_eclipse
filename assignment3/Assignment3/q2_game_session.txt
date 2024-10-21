@@ -1,0 +1,53 @@
+% Enter the names of your group members below.
+% If you only have 2 group members, leave the last space blank
+%
+%%%%%
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME:
+%%%%% NAME:
+%
+% Add the required rules in the corresponding sections. 
+% If you put the rules in the wrong sections, you will lose marks.
+%
+% You may add additional comments as you choose but DO NOT MODIFY the comment lines below
+%
+
+%%%%% SECTION: gameSession
+%%%%% Put your session for the game puzzle below
+
+[eclipse 5]: ?- Start is cputime, solve_and_print, End is cputime, Time is End - Start.
+----------------Match 1----------------
+Oakville is w
+Pickering is l
+Richmond Hill is n
+Scarborough is w
+Toronto is l
+----------------Match 2----------------
+Oakville is l
+Pickering is w
+Richmond Hill is l
+Scarborough is n
+Toronto is w
+----------------Match 3----------------
+Oakville is w
+Pickering is l
+Richmond Hill is w
+Scarborough is l
+Toronto is n
+----------------Match 4----------------
+Oakville is n
+Pickering is d
+Richmond Hill is d
+Scarborough is d
+Toronto is d
+----------------Match 5----------------
+Oakville is n
+Pickering is d
+Richmond Hill is d
+Scarborough is d
+Toronto is d
+
+Start = 0.093
+End = 0.14
+Time = 0.047000000000000014
+Yes (0.05s cpu, solution 1, maybe more) ?
