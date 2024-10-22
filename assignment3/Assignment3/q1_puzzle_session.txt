@@ -2,9 +2,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME: Feroz Noormohamed 500203723
+%%%%% NAME: Mohammad Abdul Rahman 500961636
 %
 % Add the required rules in the corresponding sections. 
 % If you put the rules in the wrong sections, you will lose marks.
@@ -15,7 +15,26 @@
 %%%%% SECTION: puzzleGenerateAndTestSession
 %%%%% Put your session for generate and test below
 
+?- Start is cputime, solve_and_print, End is cputime, Time is End - Start.
+Start = 540.39
+End = 541.343
+Time = 0.95299999999997453
+Yes (0.95s cpu, solution 1, maybe more)
+
+prolog_eclipse-2/assignment3/Assignment3/q1a_generate_and_test.pl compiled 12904 bytes in 0.00 seconds
+J = 3, E = 0, T = 8, A = 1, X = 5, L = 4, O = 6, V = 2
+JET = 308, AX = 15, LOVE = 4620
 
 
 %%%%% SECTION: puzzleInterleavingSession
 %%%%% Put your session for generate and test below
+
+?- Start is cputime, solve_and_print, End is cputime, Time is End - Start.
+Start = 541.89
+End = 542.187
+Time = 0.29700000000002547
+Yes (0.30s cpu, solution 1, maybe more)
+
+prolog_eclipse-2/assignment3/Assignment3/q1b_interleaving.pl compiled 13248 bytes in 0.00 seconds
+J = 3, E = 0, T = 8, A = 1, X = 5, L = 4, O = 6, V = 2
+JET = 308, AX = 15, LOVE = 4620
