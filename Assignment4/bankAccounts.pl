@@ -24,13 +24,13 @@ account(12,ann,metro_credit_union,4505).
 account(13,robert,royal_bank_of_canada,1091).
 account(14,feroz,cibc,5000).                    %account1 at cibc
 account(15,marzy,bank_of_montreal,2500).
-account(16,sami,td_canada_trust,4000).
+account(16,sami,td_canada_trust,14000).
 account(17,feroz,cibc,8000).                    %account2 at cibc
 account(18,mary,royal_bank_of_canada,3500).
 account(19,sami,bank_of_montreal,6500).
 account(20,raj,td_canada_trust,1500).
 account(21,nancy,cibc,12000).
-account(22,erica,metro_credit_union,8000).
+account(22,erica,metro_credit_union,11000).
 account(23,philip,royal_bank_of_canada,7000).
 account(24,feroz,scotiabank,500).
 account(25,lebron,royal_bank_of_canada,600).
