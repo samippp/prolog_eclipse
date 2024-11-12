@@ -19,6 +19,7 @@
 
 % account(AccountID, Name, Bank, Balance)
 
+account(11,trump,cibc,100).
 account(12,ann,metro_credit_union,4505).
 account(13,robert,royal_bank_of_canada,1091).
 account(14,feroz,cibc,5000).                    %account1 at cibc
@@ -32,10 +33,11 @@ account(21,nancy,cibc,12000).
 account(22,erica,metro_credit_union,8000).
 account(23,philip,royal_bank_of_canada,7000).
 account(24,feroz,scotiabank,500).
-
+account(25,lebron,royal_bank_of_canada,600).
 
 % created(AccountID, Name, Bank, Month, Year)
 
+created(11,trump,cibc,11,2007).
 created(12,ann,metro_credit_union,1,2008).
 created(13,robert,royal_bank_of_canada,4,2018).
 created(14,feroz,cibc,6,2007).                    %created1 at cibc
@@ -49,9 +51,11 @@ created(21,nancy,cibc,2, 2021).
 created(22,erica,metro_credit_union,5, 2014).
 created(23,philip,royal_bank_of_canada,6,2000).
 created(24,feroz,scotiabank,9,2024).
+created(25,lebron,royal_bank_of_canada,11,2024).
 
 % lives(P, City), where P is a person name and City
-
+lives(trump,seattle).
+lives(lebron,losAngeles).
 lives(philip,richmondHill). lives(ann,markham). lives(marzy,toronto).
 lives(sami,scarborough). lives(feroz,brampton). lives(robert, markham).
 lives(mary,toronto). lives(erica, sanFrancisco). lives(raj,scarborough).
@@ -60,6 +64,8 @@ lives(nancy, markham).
 % location(X, C), where either X is a city and C is a country, or X is bank and C is a city
 
 %cities
+location(losAngeles,usa).
+location(seattle,usa).
 location(scarborough,canada). location(markham,canada).
 location(sanFrancisco,usa). location(toronto,canada).
 location(brampton,canada). location(missisauga,canada).
@@ -74,7 +80,8 @@ location(bank_of_montreal,scarborough).
 location(scotiabank,toronto).
 
 % gender(Name, X)specifies that a gender of a person N ame is X
- 
+gender(lebron,man).
+gender(trump, man).
 gender(ann, woman). gender(robert, man). gender(philip, man).
 gender(feroz, man). gender(marzy, man). gender(sami, man).
 gender(raj, man). gender(nancy, woman). gender(erica, woman).
@@ -122,7 +129,8 @@ article(a). article(an). article(the). article(any).
 %Common nouns
 common_noun(bank,X) :- bank(X). common_noun(city, X) :- city(X). common_noun(country,X) :- country(X). common_noun(man,X) :- man(X).
 common_noun(woman,X) :- woman(X) . common_noun(owner,X) :- owner(X). common_noun(person,X) :- person(X). common_noun(account,X) :- account(X,_,_,_).
-common_noun(balance,X) :- account(_,_,_,X).
+common_noun(balance,X) :- account(_,_,_,X). common_noun(american,X) :- lives(X,City), location(City,usa). common_noun(canadian,X) :- lives(X,City), location(City,canada).
+common_noun(british,X) :- lives(X,City), location(City,uk).
 %Proper_nouns
 proper_noun(X) :- person(P). proper_noun(X) :- account(_, _, Bank, _). proper_noun(X) :- city(X). proper_noun(X) :- country(X). proper_noun(X) :- account(X,_,_,_). 
 proper_noun(X) :- number(X).
@@ -135,7 +143,9 @@ adjective(american,X) :- lives(X,Y), location(Y,usa). adjective(british,X) :- li
 %cities
 adjective(american,X) :- location(X,usa). adjective(canadian,X) :- location(X,canada). adjective(X,british) :- location(X,uk).
 %banks
-adjective(american,X) :- location(X,City), location(City, usa). adjective(canadian,X) :- location(X,city), location(City,canada). adjective(british,X) :- location(X,city), location(City,uk). 
+adjective(american,X) :- location(X,City), location(City, usa). adjective(canadian,X) :- location(X,City), location(City,canada). adjective(british,X) :- location(X,City), location(City,uk).
+%account
+adjective(Y,X) :- account(X,_,B,_), adjective(Y,B). 
 
 adjective(female,X) :- woman(X). adjective(male,X) :- man(X). 
 %local means canadian.
@@ -157,18 +167,23 @@ adjective(old,X) :- not adjective(recent,X).
 % gender(Name, X)specifies that a gender of a person N ame is X
 
 %prepositions
+preposition(of,B,A) :- account(A, _, _, B). 
 preposition(of,X,Y) :- lives(X,Y).
-preposition(of,X,Y) :- account(X, Y, _, _). 
-preposition(of,X,Y) :- account(Y, _, _, X). 
-preposition(from,X,Y) :- lives(X,Y). 
+preposition(of,A,N) :- account(A, N, _, _). 
+preposition(of,N,A) :- account(A, N, _, _). 
+preposition(of,B,N) :- account(_, N, B, _). 
+preposition(from,P,City) :- lives(P,City). 
+preposition(from,P,Country) :- lives(P,City), location(City,Country).
 preposition(in,X,Y) :- location(X,Y).
+% rule for a bank in a country
+preposition(in,Bank,Country) :- location(Bank,City), location(City,Country).
 preposition(in,X,Y) :- lives(X,Y).
-preposition(in,X,Y) :- account(X,_,B,_).
-preposition(with,X,Y) :- account(X,_,_, Y).
+preposition(in,A,B) :- account(A,_,B,_).
 preposition(with,N,A) :- account(A,N,_,_).
+preposition(with,N,B) :- account(_,N,B,_).
+preposition(with,A,B) :- account(A,_,_, B).
 preposition(with,B,A) :- account(A,_,B,_).
-preposition(between,X,Y). 
-preposition(around,X,Y).
+preposition(with,B,Balance) :- account(_,_,B,Balance).
 
 %%%%% SECTION: parser
 %%%%% For testing your lexicon for question 3, we will use the default parser initially given to you.
