@@ -3,9 +3,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME: Feroz Noormohamed 500203723
+%%%%% NAME: Mohammad Abdul Rahman 500961636
 %
 % Add the required rules in the corresponding sections. 
 % If you put the rules in the wrong sections, you will lose marks.
@@ -17,8 +17,68 @@
 %%%%% SECTION: database
 %%%%% Put statements for account, created, lives, location and gender below
 
+% account(AccountID, Name, Bank, Balance)
+
+account(12,ann,metro_credit_union,4505).
+account(13,robert,royal_bank_of_canada,1091).
+account(14,feroz,cibc,5000).                    %account1 at cibc
+account(15,marzy,bank_of_montreal,2500).
+account(16,sami,td_canada_trust,4000).
+account(17,feroz,cibc,8000).                    %account2 at cibc
+account(18,mary,royal_bank_of_canada,3500).
+account(19,sami,bank_of_montreal,6500).
+account(20,raj,td_canada_trust,1500).
+account(21,nancy,cibc,12000).
+account(22,erica,metro_credit_union,8000).
+account(23,philip,royal_bank_of_canada,7000).
+account(24,feroz,scotiabank,500).
 
 
+% created(AccountID, Name, Bank, Month, Year)
+
+created(12,ann,metro_credit_union,1,2008).
+created(13,robert,royal_bank_of_canada,4,2018).
+created(14,feroz,cibc,6,2007).                    %created1 at cibc
+created(15,marzy,bank_of_montreal,2,2023).
+created(16,sami,td_canada_trust,11,2016).
+created(17,feroz,cibc,9,2023).                    %created2 at cibc
+created(18,mary,royal_bank_of_canada,1,2018).
+created(19,sami,bank_of_montreal,6, 2017).
+created(20,raj,td_canada_trust,9,2012).
+created(21,nancy,cibc,2, 2021).
+created(22,erica,metro_credit_union,5, 2014).
+created(23,philip,royal_bank_of_canada,6,2000).
+created(24,feroz,scotiabank,9,2024).
+
+% lives(P, City), where P is a person name and City
+
+lives(philip,richmondHill). lives(ann,markham). lives(marzy,toronto).
+lives(sami,scarborough). lives(feroz,brampton). lives(robert, markham).
+lives(mary,toronto). lives(erica, sanFrancisco). lives(raj,scarborough).
+lives(nancy, markham).
+
+% location(X, C), where either X is a city and C is a country, or X is bank and C is a city
+
+%cities
+location(scarborough,canada). location(markham,canada).
+location(sanFrancisco,usa). location(toronto,canada).
+location(brampton,canada). location(missisauga,canada).
+location(richmondHill,canada).
+
+%banks
+location(royal_bank_of_canada,toronto).
+location(metro_credit_union,sanFrancisco).
+location(cibc,markham).
+location(td_canada_trust,brampton).
+location(bank_of_montreal,scarborough).
+location(scotiabank,toronto).
+
+% gender(Name, X)specifies that a gender of a person N ame is X
+ 
+gender(ann, woman). gender(robert, man). gender(philip, man).
+gender(feroz, man). gender(marzy, man). gender(sami, man).
+gender(raj, man). gender(nancy, woman). gender(erica, woman).
+gender(mary, woman).
 
 %%%%% SECTION: lexicon
 %%%%% Put the rules/statements defining articles, adjectives, proper nouns, common nouns,
@@ -29,6 +89,32 @@
 %%%%% You may introduce others as you see fit
 %%%%% DO NOT INCLUDE ANY statements for account, created, lives, location and gender 
 %%%%%     in this section
+
+%helpers
+
+% Lexicon section
+
+% Rule to identify cities
+city(X) :- location(X, _), not(bank(X)).
+
+% Rule to identify banks
+bank(B) :- account(_, _, B, _).
+
+% Rule to identify persons
+person(P) :- account(_, P, _, _).
+person(P) :- created(_, P, _, _, _).
+person(P) :- lives(P, _).
+
+% Rule to identify men
+man(M) :- gender(M, man).
+
+% Rule to identify women
+woman(W) :- gender(W, woman).
+
+% Rule to identify countries
+country(X) :- location(_, X).
+
+
 %articles
 article(a). article(an). article(the). article(any).
 %Common nouns
