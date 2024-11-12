@@ -2,13 +2,82 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME: Feroz Noormohamed 500203723
+%%%%% NAME: Mohammad Abdul Rahman 500961636
 %
 % Add your interaction below.
 % 
 %%%%% INTERACTION
+
+?- what([a, city, in, canada], X).
+X = scarborough .
+
+?- what([the, canadian, man, with, a, large, account, in, a, local, bank], X).
+X = sami .
+
+?- what([any,foreign,male,person,with,a,small,account,in,a,canadian,bank], X).
+X = trump .
+
+?- what([a,foreign,male,person,from,losAngeles,with,a,small,account,in,royal_bank_of_canada], X).
+false.
+
+?- what([a, balance, of, a, large, account, in, a, local, bank], X).
+X = 14000 .
+
+?- what([any, local, bank, with, an, account, of, a, man, from, usa], X).
+X = cibc .
+
+?- what([an, owner, from, canada, of, a, large, local, account], X).
+X = sami .
+
+?- what([a, woman, from, markham, with, a, medium, account], X).
+X = ann .
+
+?- what([a,bank,in,canada,with,a,small,account,of,a,foreign,person], X).
+X = cibc .
+
+?- what([a, medium, account, in, a, canadian, bank, with, a, small, account, of,
+an, american], X).
+X = 14 .
+
+?- what([the, balance, of, the, medium, account, in, metro_credit_union, of, a,
+woman, from, markham], X).
+X = 4505 .
+
+?- what([a,balance,of,an,account,of,an,american,with,a,small,account,in,
+a,local,bank,with,a,large,account],X).
+X = 100 .
+
+?- what([a, medium, account, in, metro_credit_union], X).
+X = 12 .
+
+?- what([a, man, with, a, small, account, in, scotiabank], X).
+X = feroz .
+
+?- what([a, canadian, man, with, an, account, in, td_canada_trust], X).
+X = sami .
+
+?- what([the, balance, of, the, large, account, in, cibc], X).
+X = 12000 .
+
+?- what([an, owner, of, a, medium, account, in, bank_of_montreal], X).
+X = marzy .
+
+?- what([a, woman, from, markham, with, an, account, in, cibc], X).
+X = nancy .
+
+?- what([a, woman, with, a, medium, account, in, royal_bank_of_canada], X).
+X = mary .
+
+?- what([a, large, account, in, metro_credit_union], X).
+X = 22 .
+
+?- what([the, oldest, account, in, royal_bank_of_canada], X).
+false.
+
+?- what([a, recent, account, in, scotiabank], X).
+X = 24 .
 
 
 
