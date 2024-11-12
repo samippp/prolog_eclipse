@@ -2,9 +2,9 @@
 % If you only have 2 group members, leave the last space blank
 %
 %%%%%
-%%%%% NAME: 
-%%%%% NAME:
-%%%%% NAME:
+%%%%% NAME: Sami Peng 501163935
+%%%%% NAME: Feroz Noormohamed 500203723
+%%%%% NAME: Mohammad Abdul Rahman 500961636
 %
 % Add your test queries below, along with a description of the test you are performing.
 % The format can look as follows
@@ -15,52 +15,48 @@
 %
 
 %%%%%% QUERY 1
-%% Description:
-
-
+%% Description: Returns the account numbers of medium accounts in Metro Credit Union
+what([a, medium, account, in, metro_credit_union], X).
 
 %%%%%% QUERY 2
-%% Description:
-
-
+%% Description: Returns the name of man with a small account in Scotiabank
+what([a, man, with, a, small, account, in, scotiabank], X).
 
 %%%%%% QUERY 3
-%% Description:
-
+%% Description: Returns the Owner are Canadian men with an account in TD Bank. 
+what([a, canadian, man, with, an, account, in, td_canada_trust], X).
 
 
 %%%%%% QUERY 4
-%% Description:
-
+%% Description: Returns the balance of the large account in CIBC. 
+what([the, balance, of, the, large, account, in, cibc], X).
 
 
 %%%%%% QUERY 5
-%% Description:
-
-
+%% Description: Returns the owner of a medium account in Bank of Montreal.
+what([an, owner, of, a, medium, account, in, bank_of_montreal], X).
 
 %%%%%% QUERY 6
-%% Description:
-
-
+%% Description: Returns the name of a woman from Markham who has an account with CIBC.
+what([a, woman, from, markham, with, an, account, in, cibc], X).
 
 %%%%%% QUERY 7
-%% Description:
-
+%% Description: Returns the name of a woman with a medium account in Royal Bank of Canada. 
+what([a, woman, with, a, medium, account, in, royal_bank_of_canada], X).
 
 
 %%%%%% QUERY 8
-%% Description:
-
+%% Description: Returns the account number of a large account in Metro Credit Union. 
+what([a, large, account, in, metro_credit_union], X).
 
 
 %%%%%% QUERY 9
-%% Description:
-
+%% Description: Returns the oldest account with Royal Bank of Canada. 
+what([the, oldest, account, in, royal_bank_of_canada], X).
 
 
 %%%%%% QUERY 10
-%% Description:
-
+%% Description: Returns the account number of a recent account in Scotiabank. 
+what([a, recent, account, in, scotiabank], X).
 
 
