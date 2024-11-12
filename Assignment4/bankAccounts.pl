@@ -224,3 +224,12 @@ prepPhrase([Prep | Rest], What) :-
 appendLists([], L, L).
 appendLists([H | L1], L2, [H | L3]) :-  appendLists(L1, L2, L3).
 
+adjective(largest, X) :- account(X, _, _, Balance), not((account(Y, _, _, OtherBalance), OtherBalance > Balance)).
+adjective(oldest, X) :- created(X, _, _, _, Year), not((created(Y, _, _, _, OtherYear), OtherYear < Year)).
+
+det(the, X) :- what(Desc, X), findall(X, what(Desc, X), Results), length(Results, 1).
+
+what([a, balance, between, Low, and, High], X) :-
+    account(X, _, _, Balance), number(Low), number(High), Balance >= Low, Balance =< High.
+
+
