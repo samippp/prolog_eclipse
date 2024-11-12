@@ -113,28 +113,62 @@ woman(W) :- gender(W, woman).
 
 % Rule to identify countries
 country(X) :- location(_, X).
-
+% Rule to find owner
+owner(X) :- created(_,X,_,_,_).
+% Rule to find account
 
 %articles
 article(a). article(an). article(the). article(any).
 %Common nouns
-common_noun(bank,X). common_noun(city, X). common_noun(country,X). common_noun(man,X).
-common_noun(woman,X).common_noun(owner,X).common_noun(person,X).common_noun(account,X).
-common_noun(balance,X).
+common_noun(bank,X) :- bank(X). common_noun(city, X) :- city(X). common_noun(country,X) :- country(X). common_noun(man,X) :- man(X).
+common_noun(woman,X) :- woman(X) . common_noun(owner,X) :- owner(X). common_noun(person,X) :- person(X). common_noun(account,X) :- account(X,_,_,_).
+common_noun(balance,X) :- account(_,_,_,X).
 %Proper_nouns
-
+proper_noun(X) :- person(P). proper_noun(X) :- account(_, _, Bank, _). proper_noun(X) :- city(X). proper_noun(X) :- country(X). proper_noun(X) :- account(X,_,_,_). 
+proper_noun(X) :- number(X).
 %Adjectives
-adjective(american,X).adjective(british,X).adjective(female,X).adjective(male,X).adjective(local,X).
-adjective(foreign,X).adjective(small,X).adjective(medium,X).adjective(large,X).adjective(old,X).adjective(recent,X).
-adjective(canadian,X).
 
-small(X) :- X < 1000.
-large(X) :- X > 10000.
-medium(X) :- X > 1000 and X < 10000.
-new(X) :- X = 2024.
+%lets deal with nations first.
+
+%people
+adjective(american,X) :- lives(X,Y), location(Y,usa). adjective(british,X) :- lives(X,Y), location(Y,uk). adjective(canadian,X) :- lives(X,Y), location(Y,canada).
+%cities
+adjective(american,X) :- location(X,usa). adjective(canadian,X) :- location(X,canada). adjective(X,british) :- location(X,uk).
+%banks
+adjective(american,X) :- location(X,City), location(City, usa). adjective(canadian,X) :- location(X,city), location(City,canada). adjective(british,X) :- location(X,city), location(City,uk). 
+
+adjective(female,X) :- woman(X). adjective(male,X) :- man(X). 
+%local means canadian.
+adjective(local,X) :- adjective(canadian,X). 
+
+%foreign means everything not canadian
+adjective(foreign,X) :- adjective(american,X).
+adjective(foreign,X) :- adjective(british,X).
+
+adjective(small,X) :- account(X, _, _, Y), Y < 1000. adjective(medium,X) :- account(X, _, _, Y), Y > 1000, Y < 10000.
+adjective(large,X) :- account(X, _, _, Y), Y > 10000. 
+adjective(recent,X) :- created(X, _, _, _, Year), Year = 2024.
+adjective(old,X) :- not adjective(recent,X).
+
+% account(AccountID, Name, Bank, Balance)
+% created(AccountID, Name, Bank, Month, Year)
+% location(X, C), where either X is a city and C is a country, or X is bank and C is a city
+% lives(P, City), where P is a person name and City
+% gender(Name, X)specifies that a gender of a person N ame is X
 
 %prepositions
-preposition(of,X,Y).preposition(from,X,Y).preposition(in,X,Y).preposition(with,X,Y).preposition(between,X,Y).preposition(around,X,Y).
+preposition(of,X,Y) :- lives(X,Y).
+preposition(of,X,Y) :- account(X, Y, _, _). 
+preposition(of,X,Y) :- account(Y, _, _, X). 
+preposition(from,X,Y) :- lives(X,Y). 
+preposition(in,X,Y) :- location(X,Y).
+preposition(in,X,Y) :- lives(X,Y).
+preposition(in,X,Y) :- account(X,_,B,_).
+preposition(with,X,Y) :- account(X,_,_, Y).
+preposition(with,N,A) :- account(A,N,_,_).
+preposition(with,B,A) :- account(A,_,B,_).
+preposition(between,X,Y). 
+preposition(around,X,Y).
 
 %%%%% SECTION: parser
 %%%%% For testing your lexicon for question 3, we will use the default parser initially given to you.
