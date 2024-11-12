@@ -160,6 +160,9 @@ adjective(large,X) :- account(X, _, _, Y), Y > 10000.
 adjective(recent,X) :- created(X, _, _, _, Year), Year = 2024.
 adjective(old,X) :- not adjective(recent,X).
 
+adjective(largest, X) :- account(X, _, _, Balance), not((account(Y, _, _, OtherBalance), OtherBalance > Balance)).
+adjective(oldest, X) :- created(X, _, _, _, Year), not((created(Y, _, _, _, OtherYear), OtherYear < Year)).
+
 % account(AccountID, Name, Bank, Balance)
 % created(AccountID, Name, Bank, Month, Year)
 % location(X, C), where either X is a city and C is a country, or X is bank and C is a city
@@ -179,6 +182,7 @@ preposition(in,X,Y) :- location(X,Y).
 preposition(in,Bank,Country) :- location(Bank,City), location(City,Country).
 preposition(in,X,Y) :- lives(X,Y).
 preposition(in,A,B) :- account(A,_,B,_).
+preposition(in,Person,Country) :- lives(Person,City), location(City,Country).
 preposition(with,N,A) :- account(A,N,_,_).
 preposition(with,N,B) :- account(_,N,B,_).
 preposition(with,A,B) :- account(A,_,_, B).
@@ -195,7 +199,8 @@ preposition(with,B,Balance) :- account(_,_,B,Balance).
 %%%%%     in this section
 
 what(Words, Ref) :- np(Words, Ref).
-
+what([a, balance, between, Low, and, High], X) :-
+    account(X, _, _, Balance), number(Low), number(High), Balance >= Low, Balance =< High.
 /* Noun phrase can be a proper name or can start with an article */
 
 np([Name],Name) :- proper_noun(Name).
@@ -205,7 +210,7 @@ np([Art|Rest], What) :- article(Art), np2(Rest, What).
 /* If a noun phrase starts with an article, then it must be followed
    by another noun phrase that starts either with an adjective
    or with a common noun. */
-
+np2([largest|Rest],What) :- np([a|Rest],What),adjective(largest,What).
 np2([Adj|Rest],What) :- adjective(Adj,What), np2(Rest, What).
 np2([Noun|Rest], What) :- common_noun(Noun, What), mods(Rest,What).
 
@@ -224,12 +229,5 @@ prepPhrase([Prep | Rest], What) :-
 appendLists([], L, L).
 appendLists([H | L1], L2, [H | L3]) :-  appendLists(L1, L2, L3).
 
-adjective(largest, X) :- account(X, _, _, Balance), not((account(Y, _, _, OtherBalance), OtherBalance > Balance)).
-adjective(oldest, X) :- created(X, _, _, _, Year), not((created(Y, _, _, _, OtherYear), OtherYear < Year)).
-
 det(the, X) :- what(Desc, X), findall(X, what(Desc, X), Results), length(Results, 1).
-
-what([a, balance, between, Low, and, High], X) :-
-    account(X, _, _, Balance), number(Low), number(High), Balance >= Low, Balance =< High.
-
 
