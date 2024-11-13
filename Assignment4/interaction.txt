@@ -10,6 +10,121 @@
 % 
 %%%%% INTERACTION
 
+%%%%% Question 1 INTERACTION
+
+Q: Is there an account in the Royal Bank of a man from Richmond Hill ?
+
+?- account(_, Person, royal_bank_of_canada, _), lives(Person, richmondHill), gender(Person, man).
+Person = philip
+false. 
+
+Q: Is there a Canadian who has more than one account in CIBC?
+
+?- account(ID1, Person, cibc, _), account(ID2, Person, cibc, _), not(ID1 = ID2), location(City, canada), lives(Person, City).
+ID1 = 14,
+Person = feroz,
+ID2 = 17,
+City = brampton ;
+ID1 = 17,
+Person = feroz,
+ID2 = 14,
+City = brampton ;
+false.
+
+Q: What are the banks in Toronto?
+
+?- location(Bank, toronto).
+Bank = royal_bank_of_canada ;
+Bank = scotiabank.
+
+Q: What is a balance of an account in the Bank of Montreal of a person from Scarborough?
+
+?- account(_, Person, bank_of_montreal, Balance), lives(Person, scarborough).
+Person = sami,
+Balance = 6500.
+
+Q: What bank keeps accounts of at least two distinct local persons ?
+
+?- account(_, Person1, Bank, _), account(_, Person2, Bank, _),not( Person1 = Person2), lives(Person1, City1), lives(Person2, City2), location(City1, canada), location(City2, canada). 
+Person1 = robert,
+Bank = royal_bank_of_canada,
+Person2 = mary,
+City1 = markham,
+City2 = toronto ;
+Person1 = robert,
+Bank = royal_bank_of_canada,
+Person2 = philip,
+City1 = markham,
+City2 = richmondHill ;
+Person1 = feroz,
+Bank = cibc,
+Person2 = nancy,
+City1 = brampton,
+City2 = markham ;
+Person1 = marzy,
+Bank = bank_of_montreal,
+Person2 = sami,
+City1 = toronto,
+City2 = scarborough ;
+Person1 = sami,
+Bank = td_canada_trust,
+Person2 = raj,
+City1 = City2, City2 = scarborough ;
+Person1 = feroz,
+Bank = cibc,
+Person2 = nancy,
+City1 = brampton,
+City2 = markham ;
+Person1 = mary,
+Bank = royal_bank_of_canada,
+Person2 = robert,
+City1 = toronto,
+City2 = markham ;
+Person1 = mary,
+Bank = royal_bank_of_canada,
+Person2 = philip,
+City1 = toronto,
+City2 = richmondHill ;
+Person1 = sami,
+Bank = bank_of_montreal,
+Person2 = marzy,
+City1 = scarborough,
+City2 = toronto ;
+Person1 = raj,
+Bank = td_canada_trust,
+Person2 = sami,
+City1 = City2, City2 = scarborough ;
+Person1 = nancy,
+Bank = cibc,
+Person2 = feroz,
+City1 = markham,
+City2 = brampton ;
+Person1 = nancy,
+Bank = cibc,
+Person2 = feroz,
+City1 = markham,
+City2 = brampton ;
+Person1 = philip,
+Bank = royal_bank_of_canada,
+Person2 = robert,
+City1 = richmondHill,
+City2 = markham ;
+Person1 = philip,
+Bank = royal_bank_of_canada,
+Person2 = mary,
+City1 = richmondHill,
+City2 = toronto ;
+false.
+
+Q: What are the cities in the USA?
+
+?- location(City, usa).
+City = losAngeles ;
+City = seattle ;
+City = sanFrancisco.
+
+%%%%% Question 4 INTERACTION
+
 ?- what([a, city, in, canada], X).
 X = scarborough .
 
