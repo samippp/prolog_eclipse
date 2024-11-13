@@ -164,6 +164,8 @@ X = 4505 .
 a,local,bank,with,a,large,account],X).
 X = 100 .
 
+% 10 New Queries
+
 ?- what([a, medium, account, in, metro_credit_union], X).
 X = 12 .
 
