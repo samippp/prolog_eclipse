@@ -20,13 +20,3 @@
 %%%%% SECTION: fertilizersSession
 %%%%% Put your session for the network problem below
 
-
-    write('Match 3'),
-    nl,write('Oakville is '), write(Oakville3) ,nl,write('Pickering is '), write(Pickering3) , nl,write('Richmond Hill is '), write(Richmond_hill3),
-    nl,write('Scarborough is '), write(Scarborough3),nl,write('Toronto is '), write(Toronto3),nl,
-    write('Match 4'),
-    nl,write('Oakville is '), write(Oakville4) ,nl,write('Pickering is '), write(Pickering4) , nl,write('Richmond Hill is '), write(Richmond_hill4),
-    nl,write('Scarborough is '), write(Scarborough4),nl,write('Toronto is '), write(Toronto4),nl,
-    write('Match 5'),
-    nl,write('Oakville is '), write(Oakville5) ,nl,write('Pickering is '), write(Pickering5) , nl,write('Richmond Hill is '), write(Richmond_hill5),
-    nl,write('Scarborough is '), write(Scarborough5),nl,write('Toronto is '), write(Toronto5),nl.

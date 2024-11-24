@@ -1,0 +1,123 @@
+
+% Enter the names of your group members below.
+% If you only have 2 group members, leave the last space blank
+%
+%%%%%
+%%%%% NAME: 
+%%%%% NAME:
+%%%%% NAME:
+%
+
+%%%%% SECTION: cpu_details
+%%%%% Describe the system you ran your tests on below.
+%%%%% It should include information about the processor (mainly speed), 
+%%%%% amount of RAM, and operator system you ran your tests on.
+
+RAM : 63.9 GB, 3600MHZ 
+OS : WINDOWS 10
+CPU : AMD Ryzen 5 5600 6 CORE, 12 THREADS, 3.50GHZ
+
+%%%%% SECTION: summary
+%%%%% Summarize your results in 5-10 sentences. Describe which states you tested on, 
+%%%%% which ones ran in a reasonable amount of time (and how long they took), and 
+%%%%% how much speedup you saw when using declarative heuristics. Report any other 
+%%%%% interesting behaviour you saw.
+
+I ran on init1, which is certainly gonna run faster than init2 due to smaller board size. 
+
+At first, the first few queries were the same in speed. That is, they ran instantly.
+
+In the simplier queries, regular and heuristic is similar in speed. But when queries took longer, ie. goal 15, heuristic became twice as fast. 
+It seems that the saved time becomes exponential the more complex the queries become.
+
+A query that took a particularly long time is goal 16. It took a total time of 130 secs in heuristic mode. This is probably due to the amount of paths 
+a graph problem can take is increasing almost exponentially. If I were to run this without heuristic mode, this would take too long.
+
+It seems like heuristic is indeed faster, as it cuts out a lot of possible paths within the tree.
+
+%%%%% SECTION: log
+%%%%% Show the actual queries you ran below, along with the output
+%%%%% This should include runtime and the actual plan found
+
+---------------------11-----------------------
+[eclipse 32]: solve_problem(heuristic,11,2,P). 
+
+Elapsed time (sec): 0.0
+
+P = [move(r1, 0, 0, 0, 1), move(r1, 1, 0, 0, 0)]
+Yes (0.00s cpu, solution 1, maybe more) ? ;
+
+[eclipse 42]: solve_problem(regular,11,2,P).   
+
+Elapsed time (sec): 0.0
+
+P = [move(r1, 0, 0, 0, 1), move(r1, 1, 0, 0, 0)]
+
+---------------------12-----------------------
+
+[eclipse 34]: solve_problem(heuristic,12,3,P). 
+
+Elapsed time (sec): 0.0
+
+P = [pass(r1, r2), move(r1, 1, 0, 0, 0)]
+Yes (0.00s cpu, solution 1, maybe more) ? ;
+
+[eclipse 43]: solve_problem(regular,12,3,P).    
+
+Elapsed time (sec): 0.0
+
+P = [pass(r1, r2), move(r1, 1, 0, 0, 0)]
+
+---------------------13-----------------------
+
+[eclipse 36]: solve_problem(heuristic,13,5,P). 
+
+Elapsed time (sec): 0.0160000000000196
+
+P = [pass(r2, r3), pass(r1, r2), move(r3, 3, 1, 3, 2), move(r1, 1, 0, 0, 0)]
+Yes (0.02s cpu, solution 1, maybe more) ? ;
+
+[eclipse 44]: solve_problem(regular,13,5,P).  
+
+Elapsed time (sec): 0.0
+
+P = [pass(r2, r3), pass(r1, r2), move(r3, 3, 1, 3, 2), move(r1, 1, 0, 0, 0)]
+
+Elapsed time (sec): 0.0310000000000059
+
+P = [pass(r2, r3), pass(r1, r2), move(r1, 0, 0, 0, 1), move(r3, 3, 1, 3, 2), move(r1, 1, 0, 0, 0)]
+
+---------------------14-----------------------
+
+[eclipse 38]: solve_problem(heuristic,14,6,P). 
+
+Elapsed time (sec): 0.187000000000012
+
+P = [shoot(r3), move(r3, 3, 2, 3, 1), pass(r2, r3), pass(r1, r2), move(r3, 3, 1, 3, 2), move(r1, 1, 0, 0, 0)]
+
+[eclipse 51]: solve_problem(regular,14,6,P).  
+
+Elapsed time (sec): 0.39100000000002
+
+P = [shoot(r3), move(r3, 3, 2, 3, 1), pass(r2, r3), pass(r1, r2), move(r3, 3, 1, 3, 2), move(r1, 1, 0, 0, 0)]
+
+---------------------15-----------------------
+[eclipse 41]: solve_problem(heuristic,15,8,P). 
+
+Elapsed time (sec): 1.51600000000002
+
+P = [move(r1, 1, 2, 2, 2), move(r1, 0, 2, 1, 2), move(r1, 0, 1, 0, 2), move(r1, 0, 0, 0, 1), move(r1, 1, 0, 0, 0), move(r2, 2, 2, 3, 2), move(r2, 1, 2, 2, 2), move(r2, 0, 2, 1, 2)]
+
+[eclipse 53]: solve_problem(regular,15,8,P).  
+
+Elapsed time (sec): 4.42199999999997
+
+P = [move(r1, 1, 2, 2, 2), move(r1, 0, 2, 1, 2), move(r1, 0, 1, 0, 2), move(r1, 0, 0, 0, 1), move(r1, 1, 0, 0, 0), move(r2, 2, 2, 3, 2), move(r2, 1, 2, 2, 2), move(r2, 0, 2, 1, 2)]
+
+---------------------16-----------------------
+
+[eclipse 30]: solve_problem(heuristic,16,11,P). 
+
+Elapsed time (sec): 130.266
+
+P = [move(r1, 2, 2, 3, 2), move(r2, 3, 2, 3, 1), move(r3, 3, 1, 3, 0), move(r1, 1, 2, 2, 2), move(r1, 0, 2, 1, 2), move(r1, 0, 1, 0, 2), move(r1, 0, 0, 0, 1), move(r1, 1, 0, 0, 0), move(r2, 2, 2, 3, 2), move(r2, 1, 2, 2, 2), move(r2, 0, 2, 1, 2)]
