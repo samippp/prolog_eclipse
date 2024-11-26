@@ -86,7 +86,34 @@ item(X) :- scrubber(X).
 %%%%% are instantiated by constants before you apply negation to the predicate that 
 %%%%% mentions these variables. 
 
+% only possible if holding less than 2 items and not holding it already
+possible(pickUp(X,P), S) :- 
+    item(X),loc(X,P,S), numHolding(C,S), C < 2.
 
+% only if x is item and robot is holding it.
+possible(putDown(X,P),S) :- 
+    item(X), holding(X,S).
+
+% only possible if faucet off and at least 1 free hand
+possible(turnOnFaucet, S) :- 
+    not faucetOn(S), numHolding(C,S), C < 2.
+
+% only possible if faucet is off and holding less than 2
+possible(turnOffFaucet, S) :- 
+    faucetOn(S), numHolding(C,S), C < 2.
+
+% possible if x is scrubber robot is holding it and has free hand.
+possible(addSoap(X), S) :- 
+    scrubber(X), holding(X,S), numHolding(C,S), C < 2.
+
+possible(scrub(X,Y), S) :- 
+    holding(X,S), holding(Y,S), glassware(X), brush(Y),
+
+possible(scrub(X,Y),S) :- 
+    holding(X,S), holding(Y,S), plate(X), sponge(Y).
+
+possible(rinse(X), S) :- 
+    faucetOn(S), holding(X).
 
 
 %%%%% SECTION: successor_state_axioms_dishwashing
@@ -103,6 +130,52 @@ item(X) :- scrubber(X).
 %%%%%
 %%%%% Write your successor state rules here: you have to write brief comments %
 
+% holding if most recent is pickup
+holding(X,[pickUp(X,P)]).
+
+% if not, search, but if most recent is putdown, then def not holding.
+holding(X,[H|S]) :- 
+    not (H = putDown(X,_)), holding(X,S).
+
+% count list for pickups. add 1 if it is 
+numHolding(C,[pickUp(_,_)|S]) :- 
+    numHolding(C1,S), C is C1 + 1.
+
+% -1 if it is putDown. init holds the base case already
+numHolding(C,[putDown(_,_)|S]) :- 
+    numHolding(C1,S), C is C1 - 1.
+
+% pretty self explanatory stuff here
+faucetOn([turnOnFaucet|S]).
+
+faucetOn(H|S) :-
+    not (H = turnOffFaucet), faucetOn(S).
+
+% if most recent is put down it is def there at p
+loc(X,P,[putDown(X,P)|S]).
+
+% if not, those items should not be picked up
+loc(X,P,[H|S]) :-
+    not ( H = pickUp(X,P)), loc(X,P,S).
+
+% wet if rinse
+wet(X,[rinse(X)|S]).
+
+% not statement is for efficiency but doesnt really matter
+wet(X,[H|S]) :-
+    not (H = rinse(X)), wet(S).
+
+% not dirty if it was rinsed while it was soapy
+dirty(X,[H|S]) :-
+    not (H = rinse(X), soapy(X,S)),dirty(X,S).
+
+soapy(X,[addSoap(X)|S]).
+
+soapy(X,[scrub(X,Y)|S]) :- 
+    soapy(Y,S).
+
+soapy(X,[H|S]) :-
+    not (H = rinse(X)) , soapy(X,S).
 
 
 
