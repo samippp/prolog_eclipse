@@ -87,33 +87,33 @@ item(X) :- scrubber(X).
 %%%%% mentions these variables. 
 
 % only possible if holding less than 2 items and not holding it already
-possible(pickUp(X,P), S) :- 
-    item(X),loc(X,P,S), numHolding(C,S), C < 2.
+poss(pickUp(X,P), S) :- 
+    item(X), place(P), loc(X,P,S), numHolding(C,S), C < 2.
 
 % only if x is item and robot is holding it.
-possible(putDown(X,P),S) :- 
-    item(X), holding(X,S).
+poss(putDown(X,P),S) :- 
+    item(X), place(P), holding(X,S).
 
 % only possible if faucet off and at least 1 free hand
-possible(turnOnFaucet, S) :- 
+poss(turnOnFaucet, S) :- 
     not faucetOn(S), numHolding(C,S), C < 2.
 
 % only possible if faucet is off and holding less than 2
-possible(turnOffFaucet, S) :- 
+poss(turnOffFaucet, S) :- 
     faucetOn(S), numHolding(C,S), C < 2.
 
 % possible if x is scrubber robot is holding it and has free hand.
-possible(addSoap(X), S) :- 
+poss(addSoap(X), S) :- 
     scrubber(X), holding(X,S), numHolding(C,S), C < 2.
 
-possible(scrub(X,Y), S) :- 
-    holding(X,S), holding(Y,S), glassware(X), brush(Y),
+poss(scrub(X,Y), S) :- 
+    holding(X,S), holding(Y,S), glassware(X), scrubber(Y), Y = brush.
 
-possible(scrub(X,Y),S) :- 
-    holding(X,S), holding(Y,S), plate(X), sponge(Y).
+poss(scrub(X,Y),S) :- 
+    holding(X,S), holding(Y,S), plate(X), scrubber(Y), Y = sponge.
 
-possible(rinse(X), S) :- 
-    faucetOn(S), holding(X).
+poss(rinse(X), S) :- 
+    item(X),faucetOn(S), holding(X,S).
 
 
 %%%%% SECTION: successor_state_axioms_dishwashing
@@ -131,7 +131,7 @@ possible(rinse(X), S) :-
 %%%%% Write your successor state rules here: you have to write brief comments %
 
 % holding if most recent is pickup
-holding(X,[pickUp(X,P)]).
+holding(X,[pickUp(X,_)|S]).
 
 % if not, search, but if most recent is putdown, then def not holding.
 holding(X,[H|S]) :- 
@@ -156,7 +156,7 @@ loc(X,P,[putDown(X,P)|S]).
 
 % if not, those items should not be picked up
 loc(X,P,[H|S]) :-
-    not ( H = pickUp(X,P)), loc(X,P,S).
+    item(X),not (H = pickUp(X,P)), loc(X,P,S).
 
 % wet if rinse
 wet(X,[rinse(X)|S]).
@@ -176,8 +176,6 @@ soapy(X,[scrub(X,Y)|S]) :-
 
 soapy(X,[H|S]) :-
     not (H = rinse(X)) , soapy(X,S).
-
-
 
 %%%%% SECTION: declarative_heuristics_dishwashing
 %%%%% The predicate useless(A,ListOfPastActions) is true if an action A is useless
