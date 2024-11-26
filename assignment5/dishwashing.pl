@@ -49,7 +49,7 @@
 %% Goal states for dishwashingInit1
 goal_state(11, S) :- holding(brush, S), soapy(brush, S).
 goal_state(12, S) :- loc(brush, dish_rack, S), loc(sponge, counter, S).
-goal_state(13, S) :- not dirty(g1, S), not soapy(g1, S).
+goal_state(13, S) :- dirty(g1, S), soapy(g1, S).
 goal_state(14, S) :- not dirty(g1, S), not soapy(g1, S), loc(g1, dish_rack, S), not faucetOn(S). 
 goal_state(15, S) :- not dirty(g1, S), not soapy(g1, S), loc(g1, dish_rack, S), not soapy(brush, S),
                         loc(brush, dish_rack, S), not faucetOn(S). 
@@ -113,7 +113,7 @@ poss(scrub(X,Y),S) :-
     holding(X,S), holding(Y,S), plate(X), scrubber(Y), Y = sponge.
 
 poss(rinse(X), S) :- 
-    item(X),faucetOn(S), holding(X,S).
+    faucetOn(S), holding(X,S).
 
 
 %%%%% SECTION: successor_state_axioms_dishwashing
@@ -148,7 +148,7 @@ numHolding(C,[putDown(_,_)|S]) :-
 % pretty self explanatory stuff here
 faucetOn([turnOnFaucet|S]).
 
-faucetOn(H|S) :-
+faucetOn([H|S]) :-
     not (H = turnOffFaucet), faucetOn(S).
 
 % if most recent is put down it is def there at p
@@ -169,13 +169,13 @@ wet(X,[H|S]) :-
 dirty(X,[H|S]) :-
     not (H = rinse(X), soapy(X,S)),dirty(X,S).
 
-soapy(X,[addSoap(X)|S]).
+soapy(X,[addSoap(X)| S]).
 
-soapy(X,[scrub(X,Y)|S]) :- 
+soapy(X,[scrub(X,Y)| S]) :- 
     soapy(Y,S).
 
 soapy(X,[H|S]) :-
-    not (H = rinse(X)) , soapy(X,S).
+    item(X),not (H = rinse(X)), soapy(X,S).
 
 %%%%% SECTION: declarative_heuristics_dishwashing
 %%%%% The predicate useless(A,ListOfPastActions) is true if an action A is useless
